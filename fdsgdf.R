@@ -47,33 +47,96 @@ fun(got);
 #crescente por temporada (de 1 atÃ© 8).
 
 
+
 func = function(list) {
-  x = list[,1]
   y = NULL
-  a = 15
+  a = 0  
   b = 0
   c = 0
-  for (i in list[,1]) {
+  for (i in list[,1]) {##pega o número de temporadas
     if (i > c) {
        c = i
     }
   }
+  
   for(j in 1:c){
+    a1 = 15
+    b1 = 0
     u = 1;
     for(k in list[,1]){
       if(j==k){
-        if(list[u,3] >= b){
-          b = k
-        }else{
-          a = k
+        if(list[u,3] > b1){
+          b1 = list[u,3]
+          b = u
         }
-      }else{
-        break;
+        if(list[u,3] < a1){
+          a1 = list[u,3]
+          a = u
+        }
       }
       u = u +1
     }
-    print(a)
-    print(b)
+    ##print(a)
+    ##print(b)
+    ##y = c(y,as.character(list[a,2]))
+    ##y = c(y,as.character(list[b,2]))
+    y = c(y,a)
+    y = c(y,b)
+   
   }
+  return(y)
 }
-func(got)
+
+fi = function(list){
+  r = func(list)
+  print(r)
+  x = length(r)
+  y = NULL
+  for(i in  1:x){
+    y = c(y,as.character(list[r[i],2]))
+  }
+  return(y)
+}
+
+qw = fi(got)
+qw
+
+
+funci = function(list){
+  r = func(list)
+  titulo = NULL
+  nota = NULL
+  temporada = NULL
+  x = length(r)
+  print(x)
+  v = NULL
+  for(i in 1:x){
+    titulo = c(titulo,as.character(list[r[i],2]))
+  }
+  for(i in 1:x){
+    nota = c(nota,as.character(list[r[i],3]))
+  }
+  for(i in 1:x){
+    temporada = c(temporada,as.character(list[r[i],1]))
+  }
+  pq = data.frame(titulo,nota,temporada)
+  print(pq)
+}
+
+
+
+r = funci(got)
+r
+print(r[2])
+
+
+n = c(2, 3, 5) 
+s = c("aa", "bb", "cc") 
+
+tr = NULL
+tr =c(tr,n)
+tr =c(tr,s)
+tr[1]
+
+got[12,2]
+
