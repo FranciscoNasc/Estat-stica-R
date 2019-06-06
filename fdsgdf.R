@@ -21,7 +21,7 @@ median(got[,5])
 
 #questao 4
 
-#FaÃ§a uma funÃ§Ã£o que retorna apenas os nomes dos episÃ³dios que possuem notas maiores ou iguais a nove (9).
+#FaÃÂ§a uma funÃÂ§ÃÂ£o que retorna apenas os nomes dos episÃÂ³dios que possuem notas maiores ou iguais a nove (9).
 
 fun = function(list) {
   x = list[,3]
@@ -42,9 +42,9 @@ fun(got);
 
 #questao 5
 
-#FaÃ§a uma funÃ§Ã£o que retorna o nome dos episÃ³dios com menor e maior notas, nessa ordem para cada uma das temporadas. 
-#Por fim, faÃ§a um dataframe com cada episÃ³dio encontrado com as colunas TÃTULO, NOTA, TEMPORADA ordenados de forma 
-#crescente por temporada (de 1 atÃ© 8).
+#FaÃÂ§a uma funÃÂ§ÃÂ£o que retorna o nome dos episÃÂ³dios com menor e maior notas, nessa ordem para cada uma das temporadas. 
+#Por fim, faÃÂ§a um dataframe com cada episÃÂ³dio encontrado com as colunas TÃÂTULO, NOTA, TEMPORADA ordenados de forma 
+#crescente por temporada (de 1 atÃÂ© 8).
 
 
 
@@ -53,7 +53,7 @@ func = function(list) {
   a = 0  
   b = 0
   c = 0
-  for (i in list[,1]) {##pega o número de temporadas
+  for (i in list[,1]) {##pega o nÃºmero de temporadas
     if (i > c) {
        c = i
     }
@@ -85,7 +85,6 @@ func = function(list) {
 
 fi = function(list){
   r = func(list)
-  print(r)
   x = length(r)
   y = NULL
   for(i in  1:x){
@@ -124,7 +123,7 @@ r = funci(got)
 r
 
 #Questao 6
-#Faça uma função que retorne qual a temporada com o menor desvio padrão na audiência.
+#FaÃ§a uma funÃ§Ã£o que retorne qual a temporada com o menor desvio padrÃ£o na audiÃªncia.
 
 funct = function(list) {
   tempnumber = 0
@@ -163,9 +162,43 @@ funct = function(list) {
 funct(got)
 
 
-##Questão 9 :Faça uma função que dado o nome de um personagem, cria um histograma 
-##onde mostra a frequência de aparição desse personagem a cada temporada.
-##Não esqueça de dar um título e fazer ele de forma colorida, facilitando a visualização.
+
+
+#questao 8
+#Faça uma função que retorne uma lista com os personagens que só apareceram em um 
+#único episódio na quarta (4ª) temporada.
+
+
+qua = function(list){
+  v = NULL
+  x = length(list[,1])
+  for(i in 1:x){
+    if(list[i,1] == 4){
+      v = c(v,unlist(strsplit(as.character(list[i,4]),",")))
+      l = table(v)
+    }
+  }
+  tu = as.data.frame(l)
+  
+  s = length(tu[,2])
+  resp = NULL
+  for(k in 1:s){
+    if(tu[k,2] == 1){
+      resp = c(resp,as.character(tu[k,1]))
+    }
+  }
+
+  
+  return(resp)
+}
+g = qua(got)
+g
+
+
+
+##QuestÃ£o 9 :FaÃ§a uma funÃ§Ã£o que dado o nome de um personagem, cria um histograma 
+##onde mostra a frequÃªncia de apariÃ§Ã£o desse personagem a cada temporada.
+##NÃ£o esqueÃ§a de dar um tÃ�tulo e fazer ele de forma colorida, facilitando a visualizaÃ§Ã£o.
 ##Um exemplo para o personagem Bran Stark(Isaac Hempstead) seria:
 
 
@@ -185,15 +218,18 @@ tyr = function(a,b){
   }
   
   c = 0
-  for (i in b[,1]) {##pega o número de temporadas
+  for (i in b[,1]) {##pega o nÃºmero de temporadas
     if (i > c) {
       c = i
     }
   }
   
-  return(hist(resp,main = nome,xlab = "temporada" ,ylab = "aparições",breaks = 10,freq = TRUE,xlim =c(1,c), ylim = c(1,8),col = 100))
+  return(hist(resp,main = nome,xlab = "temporada" ,ylab = "ocorrencia",breaks = 10,freq = TRUE,xlim =c(1,c), ylim = c(1,8),col = 100))
 }
 
 t = tyr(nome,got)
 t
+
+
+
 
